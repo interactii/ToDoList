@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>Jordan Signo | IT & Digital Design</title>
+        <meta charset="utf-8" />
+        <meta name="description" content="I am Jordan, web designer and photographer." />
+        <meta name="keywords" content="website, web designer, photographer, responsive website" />
+        <meta name="author" content="JMS" />
+        <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+        <script src="jquery-3.3.1.js"></script>
+        <link href="stylesheet.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <header>
+            <div class="widgets-section">
+                <div class="widget-container">
+                    <div class="widget">
+                        <a href="#"><img class="widget-logo" src="images/fb_logo.png" alt="facebook logo"/></a>
+                        <a href="#"><img class="widget-logo" src="images/instagram_logo.png" alt="facebook logo"/></a>
+                        <a href="#"><img class="widget-logo" src="images/twitter_logo.png" alt="facebook logo"/></a>
+                    </div>
+                </div>
+            </div>
+            <div class="navbar">
+                <div class="navbar-header">
+                    <a href="#"><img class="logo" src="favicon/favicon-96x96.png" alt="logo"/></a>
+                    <div>
+                        <h2 class="title">JORDAN SIGNO </h2>
+                        <h6 class="subtitle">Web Designer - Photographer </h6>
+                    </div>
+                    <button class="nav-button">
+                       <span class="nav-button-menu"></span>
+                       <span class="nav-button-menu"></span>
+                       <span class="nav-button-menu"></span>
+                    </button>
+                </div>
+
+                <nav class="navigation">
+                    <ul>
+                        <li>
+                            <a id="active" href="index.html">Home</a>
+                        </li>
+                        <li>
+                            <a href="about.html">About</a>
+                        </li>
+                        <li>
+                            <a href="projects.html">Projects</a>
+                        </li>
+                        <li>
+                            <a href="portraits.html">Portraits</a>
+                        </li>
+                        <li>
+                            <a href="clients.html">Clients</a>
+                        </li>
+                        <li>
+                            <a href="contact.html">Contact</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+        <div class="main">
+            <div class="welcome">
+                <div class="welcome-text">
+                    <h2>Digital | Designs | Creative</h2>
+                    <p>Forged by Creative Technology Educators</p>
+                    <p>Australia</p>
+                </div>   
+            </div>
+            
+        </div>
+        <div class="contact">
+            <div class="contact-button">
+                <a href="contact.html">Contact Me</a>
+            </div>
+        </div>
+        <footer>
+            <div class="footer-item-container">
+                <div class="footnote">
+                    <p>©Copyright 2018 by Jordan Signo. All material used are my own work.</p>
+                </div>
+                <div class="footnote">
+                    <p>Created for Intro to Web - Assessment 1[AIT-Melbourne]</p>
+                </div>
+            </div>
+        </footer>
+        <script>
+            $(".nav-button").on("click",toggleMenu);
+            function toggleMenu(){
+                $(".navigation ul").toggleClass("open"); 
+            }
+        </script>
+    </body>
+</html>
