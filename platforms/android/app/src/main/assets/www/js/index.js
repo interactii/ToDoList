@@ -1,46 +1,127 @@
-/*
- * Licensed to the Apache Software Foundation (ASF) under one
- * or more contributor license agreements.  See the NOTICE file
- * distributed with this work for additional information
- * regarding copyright ownership.  The ASF licenses this file
- * to you under the Apache License, Version 2.0 (the
- * "License"); you may not use this file except in compliance
- * with the License.  You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing,
- * software distributed under the License is distributed on an
- * "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
- * KIND, either express or implied.  See the License for the
- * specific language governing permissions and limitations
- * under the License.
- */
-var app = {
-    // Application Constructor
-    initialize: function() {
-        document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
-    },
+//   var app = {
+//      // Application Constructor
+//       initialize: function() {
+//           document.addEventListener('deviceready', this.onDeviceReady.bind(this), false);
+//       },
 
-    // deviceready Event Handler
-    //
-    // Bind any cordova events here. Common events are:
-    // 'pause', 'resume', etc.
-    onDeviceReady: function() {
-        this.receivedEvent('deviceready');
-    },
+//       // deviceready Event Handler
+//       //
+//       // Bind any cordova events here. Common events are:
+//       // 'pause', 'resume', etc.
+//       onDeviceReady: function() {
+//         
+//         
+//         alert('function test success')
+//       },
 
-    // Update DOM on a Received Event
-    receivedEvent: function(id) {
-        var parentElement = document.getElementById(id);
-        var listeningElement = parentElement.querySelector('.listening');
-        var receivedElement = parentElement.querySelector('.received');
+//       // Update DOM on a Received Event
+//     //   receivedEvent: function(id) {
+//     //     var parentElement = document.getElementById(id);
+//     //       var listeningElement = parentElement.querySelector('.listening');
+//     //       var receivedElement = parentElement.querySelector('.received');
 
-        listeningElement.setAttribute('style', 'display:none;');
-        receivedElement.setAttribute('style', 'display:block;');
+//     //       listeningElement.setAttribute('style', 'display:none;');
+//     //       receivedElement.setAttribute('style', 'display:block;');
 
-        console.log('Received Event: ' + id);
+//     //       console.log('Received Event: ' + id);
+//     //   }
+//   };
+
+//   app.initialize();
+
+document.addEventListener('deviceready', init, false);
+const dateToday = document.getElementById("date");
+const list = document.getElementById("list");
+const input = document.getElementById("input");
+
+const completed = "completed";
+const check = "ui-icon-check";
+const uncheck = "ui-icon-clock";
+
+
+let ToDoList, id;
+let dataStore = localStorage.getItem("TODO");
+
+if(dataStore){
+    ToDoList = JSON.parse(dataStore);
+    id = ToDoList.length;
+    loadList(ToDoList);
+}else{
+    ToDoList = [];
+    id = 0;
+}
+
+function loadList(array){
+    array.forEach(function(item){
+        addToDo(item.name, item.id, item.done, item.trash);
+    });
+}
+
+function init(){
+    var date = new Date();
+    dateToday.innerHTML = date.toLocaleDateString("en-US", { weekday: "long", month:"short", day:"numeric"});
+    alert('Success')
+}
+
+document.addEventListener("keyup", function(keyEvent){
+    if (keyEvent.keyCode == 13 ){
+        const todo = input.value;
+        if(todo){
+            addToDo(todo, id, false, false);
+            ToDoList.push(
+                {
+                    name: todo,
+                    id: id,
+                    done: false,
+                    trash: false
+                }
+            );
+            localStorage.setItem("TODO", JSON.stringify(ToDoList));
+            id++
+        }
+        input.value = "";
     }
-};
+});
 
-app.initialize();
+list.addEventListener("click", function(clickEvent){
+   let element = clickEvent.target;
+   const status = clickEvent.target.attributes.status.value;
+
+   if(status=="Done"){
+       toggleTask(element);
+   }else if(status=="Delete"){
+       deleteTask(element);
+   }else if(status=="Complete"){
+       completeTask(element);
+   }
+   localStorage.setItem("TODO", JSON.stringify(ToDoList));
+})
+
+function addToDo(todo, id, done, trash){
+
+    if(trash){return;}
+    var DONE = done ? check : uncheck;
+    var COMPLETE = done ? completed : "";
+
+    const newTask = `<li class="item">
+                        <i class="ui-btn ui-shadow ui-corner-all ${DONE} ui-btn-icon-notext ui-btn-inline co" status="Done" id="${id}"></i>
+                        <p class="text ${COMPLETE}" id="${id}">${todo}</p>
+                        <i class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline de" status="Delete" id="${id}"></i> 
+                    </li>`;
+
+    const position = "beforeend";
+    list.insertAdjacentHTML(position, newTask);
+}
+
+function toggleTask(element){
+    element.classList.toggle(check);
+    element.classList.toggle(uncheck);
+    element.parentNode.querySelector(".text").classList.toggle(completed);
+
+    ToDoList[element.id].done = ToDoList[element.id].done ? false : true;
+}
+
+function deleteTask(element){
+    element.parentNode.parentNode.removeChild(element.parentNode);
+    ToDoList[element.id].trash = true;
+}
