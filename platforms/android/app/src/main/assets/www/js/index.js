@@ -86,7 +86,6 @@ document.addEventListener("keyup", function(keyEvent){
 list.addEventListener("click", function(clickEvent){
    let element = clickEvent.target;
    const status = clickEvent.target.attributes.status.value;
-
    if(status=="Done"){
        toggleTask(element);
    }else if(status=="Delete"){
@@ -98,30 +97,26 @@ list.addEventListener("click", function(clickEvent){
 })
 
 function addToDo(todo, id, done, trash){
-
     if(trash){return;}
     var DONE = done ? check : uncheck;
     var COMPLETE = done ? completed : "";
-
     const newTask = `<li class="item">
                         <i class="ui-btn ui-shadow ui-corner-all ${DONE} ui-btn-icon-notext ui-btn-inline co" status="Done" id="${id}"></i>
                         <p class="text ${COMPLETE}" id="${id}">${todo}</p>
                         <i class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline de" status="Delete" id="${id}"></i> 
                     </li>`;
-
     const position = "beforeend";
     list.insertAdjacentHTML(position, newTask);
 }
 
-function toggleTask(element){
+ toggleTask = (element) => {
     element.classList.toggle(check);
     element.classList.toggle(uncheck);
     element.parentNode.querySelector(".text").classList.toggle(completed);
-
     ToDoList[element.id].done = ToDoList[element.id].done ? false : true;
 }
 
-function deleteTask(element){
+deleteTask = (element) =>{
     element.parentNode.parentNode.removeChild(element.parentNode);
     ToDoList[element.id].trash = true;
 }

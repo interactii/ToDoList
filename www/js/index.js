@@ -30,9 +30,10 @@
 //   app.initialize();
 
 document.addEventListener('deviceready', init, false);
+
 const dateToday = document.getElementById("date");
 const list = document.getElementById("list");
-const input = document.getElementById("input");
+const text_input = document.getElementById("input");
 
 const completed = "completed";
 const check = "ui-icon-check";
@@ -41,6 +42,12 @@ const uncheck = "ui-icon-clock";
 
 let ToDoList, id;
 let dataStore = localStorage.getItem("TODO");
+
+function init(){
+    var date = new Date();
+    dateToday.innerHTML = date.toLocaleDateString("en-US", { weekday: "long", month:"short", day:"numeric"});
+    alert('Success')
+}
 
 if(dataStore){
     ToDoList = JSON.parse(dataStore);
@@ -51,21 +58,15 @@ if(dataStore){
     id = 0;
 }
 
-function loadList(array){
-    array.forEach(function(item){
+function loadList(tdList){
+    tdList.forEach((item)=>{
         addToDo(item.name, item.id, item.done, item.trash);
     });
 }
 
-function init(){
-    var date = new Date();
-    dateToday.innerHTML = date.toLocaleDateString("en-US", { weekday: "long", month:"short", day:"numeric"});
-    alert('Success')
-}
-
 document.addEventListener("keyup", function(keyEvent){
     if (keyEvent.keyCode == 13 ){
-        const todo = input.value;
+        const todo = text_input.value;
         if(todo){
             addToDo(todo, id, false, false);
             ToDoList.push(
@@ -86,7 +87,6 @@ document.addEventListener("keyup", function(keyEvent){
 list.addEventListener("click", function(clickEvent){
    let element = clickEvent.target;
    const status = clickEvent.target.attributes.status.value;
-
    if(status=="Done"){
        toggleTask(element);
    }else if(status=="Delete"){
@@ -98,30 +98,26 @@ list.addEventListener("click", function(clickEvent){
 })
 
 function addToDo(todo, id, done, trash){
-
     if(trash){return;}
     var DONE = done ? check : uncheck;
     var COMPLETE = done ? completed : "";
-
     const newTask = `<li class="item">
                         <i class="ui-btn ui-shadow ui-corner-all ${DONE} ui-btn-icon-notext ui-btn-inline co" status="Done" id="${id}"></i>
                         <p class="text ${COMPLETE}" id="${id}">${todo}</p>
                         <i class="ui-btn ui-shadow ui-corner-all ui-icon-delete ui-btn-icon-notext ui-btn-inline de" status="Delete" id="${id}"></i> 
                     </li>`;
-
     const position = "beforeend";
     list.insertAdjacentHTML(position, newTask);
 }
 
-function toggleTask(element){
+ toggleTask = (element) => {
     element.classList.toggle(check);
     element.classList.toggle(uncheck);
     element.parentNode.querySelector(".text").classList.toggle(completed);
-
     ToDoList[element.id].done = ToDoList[element.id].done ? false : true;
 }
 
-function deleteTask(element){
+deleteTask = (element) =>{
     element.parentNode.parentNode.removeChild(element.parentNode);
     ToDoList[element.id].trash = true;
 }
