@@ -18,6 +18,18 @@
     <allow-intent href="geo:*" />
     <platform name="android">
         <allow-intent href="market:*" />
+        <splash src="res/screen/android/splash-land.jpg" density="land-hdpi"/>
+    <splash src="res/screen/android/splash-land.jpg" density="land-ldpi"/>
+    <splash src="res/screen/android/splash-land.jpg" density="land-mdpi"/>
+    <splash src="res/screen/android/splash-land.jpg" density="land-xhdpi"/>
+    <splash src="res/screen/android/splash-land.jpg" density="land-xxhdpi"/>
+ 
+    <splash src="res/screen/android/splash.jpg" density="port-hdpi"/>
+    <splash src="res/screen/android/splash.jpg" density="port-ldpi"/>
+    <splash src="res/screen/android/splash.jpg" density="port-mdpi"/>
+    <splash src="res/screen/android/splash.jpg" density="port-xhdpi"/>
+    <splash src="res/screen/android/splash.jpg" density="port-xxhdpi"/>
+    <preference name="SplashScreenDelay" value="5000" />
     </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />

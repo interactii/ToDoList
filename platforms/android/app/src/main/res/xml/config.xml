@@ -4,6 +4,16 @@
         <param name="android-package" value="org.apache.cordova.whitelist.WhitelistPlugin" />
         <param name="onload" value="true" />
     </feature>
+    <feature name="SplashScreen">
+        <param name="android-package" value="org.apache.cordova.splashscreen.SplashScreen" />
+        <param name="onload" value="true" />
+    </feature>
+    <feature name="Notification">
+        <param name="android-package" value="org.apache.cordova.dialogs.Notification" />
+    </feature>
+    <feature name="Toast">
+        <param name="android-package" value="nl.xservices.plugins.Toast" />
+    </feature>
     <name>ToDoList</name>
     <description>
         A sample Apache Cordova application that responds to the deviceready event.
@@ -20,5 +30,16 @@
     <allow-intent href="mailto:*" />
     <allow-intent href="geo:*" />
     <allow-intent href="market:*" />
+    <splash density="land-hdpi" src="res/screen/android/splash-land.jpg" />
+    <splash density="land-ldpi" src="res/screen/android/splash-land.jpg" />
+    <splash density="land-mdpi" src="res/screen/android/splash-land.jpg" />
+    <splash density="land-xhdpi" src="res/screen/android/splash-land.jpg" />
+    <splash density="land-xxhdpi" src="res/screen/android/splash-land.jpg" />
+    <splash density="port-hdpi" src="res/screen/android/splash.jpg" />
+    <splash density="port-ldpi" src="res/screen/android/splash.jpg" />
+    <splash density="port-mdpi" src="res/screen/android/splash.jpg" />
+    <splash density="port-xhdpi" src="res/screen/android/splash.jpg" />
+    <splash density="port-xxhdpi" src="res/screen/android/splash.jpg" />
     <preference name="loglevel" value="DEBUG" />
+    <preference name="SplashScreenDelay" value="5000" />
 </widget>

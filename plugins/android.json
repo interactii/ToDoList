@@ -9,6 +9,15 @@
   "installed_plugins": {
     "cordova-plugin-whitelist": {
       "PACKAGE_NAME": "com.jmsigno.myproject"
+    },
+    "cordova-plugin-splashscreen": {
+      "PACKAGE_NAME": "com.jmsigno.myproject"
+    },
+    "cordova-plugin-dialogs": {
+      "PACKAGE_NAME": "com.jmsigno.myproject"
+    },
+    "cordova-plugin-x-toast": {
+      "PACKAGE_NAME": "com.jmsigno.myproject"
     }
   },
   "dependent_plugins": {}
